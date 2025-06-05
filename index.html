@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merlin Systems - The OS for Agentic Economies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #5e35b1;
+            --primary-dark: #4527a0;
+            --secondary: #f9a825;
+            --dark: #121212;
+            --light: #f5f5f7;
+            --gray: #757575;
+            --success: #43a047;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            font-size: 32px;
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary);
+            color: var(--dark);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            max-width: 600px;
+            z-index: 1;
+            opacity: 0.9;
+        }
+        
+        /* About Section */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Vision Section */
+        .vision {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .vision .section-title::after {
+            background: var(--secondary);
+        }
+        
+        .vision-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .vision-card {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .vision-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .vision-card-icon {
+            font-size: 40px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .vision-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        
+        /* Product Section */
+        .product-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .product-tab {
+            padding: 10px 20px;
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .product-tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .product-tab:hover:not(.active) {
+            background-color: rgba(94, 53, 177, 0.1);
+        }
+        
+        .product-content {
+            display: none;
+        }
+        
+        .product-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .product-feature {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .product-feature:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .product-feature-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .product-feature-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .product-feature-text {
+            flex: 1;
+        }
+        
+        .product-feature-text h3 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Team Section */
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .team-member-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .team-member-info {
+            padding: 20px;
+        }
+        
+        .team-member-info h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .team-member-info p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .cta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .product-feature, .product-feature:nth-child(even) {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 15px 10px;
+            }
+            
+            .hero {
+                text-align: center;
+                padding-top: 120px;
+            }
+            
+            .hero-content {
+                margin: 0 auto;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .hero-image {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <span class="logo-icon">🧙🏿</span>
+                <span>Merlin Systems</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#vision">Vision</a></li>
+                    <li><a href="#product">Product</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>The OS for Agentic Economies</h1>
+                <p>Merlin Systems is the third infrastructural layer that transforms human intent into automated execution across the digital economy.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Join as Founding Partner</a>
+                    <a href="#product" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Digital Transformation" class="hero-image">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">About Merlin Systems</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Programmable Agency for the Digital Age</h3>
+                    <p>Merlin Systems represents the missing layer between human intention and digital execution. Where Stripe moves money and Snowflake moves data, Merlin moves intent — transforming abstract goals into concrete, automated outcomes across the internet economy.</p>
+                    <p>We're building the foundational layer that allows any organization to deploy intelligent agents that understand context, execute complex workflows, and adapt to changing conditions.</p>
+                    <p>Merlin Systems is positioned to become the third pillar of internet infrastructure, enabling a new class of applications that operate with human-level intentionality at machine-level scale.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Digital Infrastructure">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="section vision" id="vision">
+        <div class="container">
+            <h2 class="section-title">Our Vision</h2>
+            <div class="vision-cards">
+                <div class="vision-card">
+                    <div class="vision-card-icon">🧙‍♂️</div>
+                    <h3>Programmable Agency</h3>
+                    <p>Create systems that can understand high-level business intent and autonomously coordinate the complex technical execution required to achieve it.</p>
+                </div>
+                <div class="vision-card">
+                    <div class="vision-card-icon">⚖️</div>
+                    <h3>Close the Gap</h3>
+                    <p>Bridge the $2 trillion coordination problem where businesses spend enormous resources on alignment and execution rather than value creation.</p>
+                </div>
+                <div class="vision-card">
+                    <div class="vision-card-icon">🔮</div>
+                    <h3>Agentic Infrastructure</h3>
+                    <p>Establish the operating system for a new class of organization where intelligent agents handle the translation between human intention and digital execution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section class="section" id="product">
+        <div class="container">
+            <h2 class="section-title">Product Architecture</h2>
+            <div class="product-tabs">
+                <button class="product-tab active" data-tab="core">Merlin Core</button>
+                <button class="product-tab" data-tab="roundtable">Roundtable</button>
+                <button class="product-tab" data-tab="crystal">Crystal Ball</button>
+                <button class="product-tab" data-tab="excalibur">Excalibur API</button>
+            </div>
+            <div class="product-content active" id="core-content">
+                <div class="product-feature">
+                    <div class="product-feature-image">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="AI Core">
+                    </div>
+                    <div class="product-feature-text">
+                        <h3>The Foundational AI Reasoning Engine</h3>
+                        <p>Merlin Core provides natural language intent parsing, multi-step workflow orchestration, and a cross-platform integration layer that enables real-time adaptation and learning.</p>
+                        <p>This isn't just natural language processing — it's semantic understanding of business context, constraints, and objectives.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="product-content" id="roundtable-content">
+                <div class="product-feature">
+                    <div class="product-feature-image">
+                        <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Collaboration">
+                    </div>
+                    <div class="product-feature-text">
+                        <h3>Collaborative Decision-Making Framework</h3>
+                        <p>The Roundtable provides multi-agent consensus protocols, stakeholder representation and voting mechanisms, with transparent audit trails and governance.</p>
+                        <p>This enables agents to collaborate, negotiate, and make decisions without human oversight while maintaining alignment with organizational values.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="product-content" id="crystal-content">
+                <div class="product-feature">
+                    <div class="product-feature-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Analytics">
+                    </div>
+                    <div class="product-feature-text">
+                        <h3>Predictive Analytics and Scenario Modeling</h3>
+                        <p>Crystal Ball provides market trend analysis and forecasting, risk assessment and mitigation planning, with performance optimization recommendations.</p>
+                        <p>This creates agents that improve their performance over time, learning from outcomes and adapting to changing conditions without losing reliability.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="product-content" id="excalibur-content">
+                <div class="product-feature">
+                    <div class="product-feature-image">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Developer Tools">
+                    </div>
+                    <div class="product-feature-text">
+                        <h3>The Developer Toolkit</h3>
+                        <p>Excalibur API provides agent deployment and management, custom workflow creation, an integration marketplace, and performance monitoring and analytics.</p>
+                        <p>This is the bridge that allows developers to extend and customize the Merlin platform for their specific needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section" id="team">
+        <div class="container">
+            <h2 class="section-title">Join the Round Table</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 50px;">We're looking for Urgestein — founding rocks in German to refer to people at the base or very start of a company. Join us as we build the third pillar of internet infrastructure.</p>
+            <div class="team-members">
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="CTO" class="team-member-image">
+                    <div class="team-member-info">
+                        <h3>Technical Co-Founder / CTO</h3>
+                        <p>Lead AI/ML architecture and research</p>
+                        <a href="#contact" class="btn btn-primary">Apply</a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="CPO" class="team-member-image">
+                    <div class="team-member-info">
+                        <h3>Product Co-Founder / CPO</h3>
+                        <p>Define user experience and product strategy</p>
+                        <a href="#contact" class="btn btn-primary">Apply</a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="COO" class="team-member-image">
+                    <div class="team-member-info">
+                        <h3>Growth Co-Founder / COO</h3>
+                        <p>Scale operations and business development</p>
+                        <a href="#contact" class="btn btn-primary">Apply</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2>Ready to Build the Future of Agentic Infrastructure?</h2>
+            <p>We're looking for visionary founders who understand that we're not just building software — we're architecting the infrastructure for a new form of economic organization.</p>
+            <a href="mailto:founders@merlinsystems.ai" class="btn btn-primary">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Merlin Systems</h3>
+                    <p>The OS for Agentic Economies. Transforming human intent into automated execution across the digital economy.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="#product">Merlin Core</a></li>
+                        <li><a href="#product">Roundtable</a></li>
+                        <li><a href="#product">Crystal Ball</a></li>
+                        <li><a href="#product">Excalibur API</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#vision">Vision</a></li>
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#contact">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Copyright</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Merlin Systems™. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        const tabs = document.querySelectorAll('.product-tab');
+        const contents = document.querySelectorAll('.product-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(`${tabId}-content`).classList.add('active');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+            }
+        });
+    </script>
+</body>
+</html>
