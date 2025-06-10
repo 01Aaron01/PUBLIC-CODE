@@ -208,64 +208,82 @@ with tab1:
 with tab2:
     st.header("Geographic Market Distribution")
     
-    col1, col2 = st.columns([2, 1])
+    # Regional Performance Metrics at the top
+    st.subheader("Regional Performance Summary")
     
-    with col1:
-        # Create a simple map representation
-        # Since we don't have actual coordinates, we'll create a conceptual map
-        fig_map = go.Figure()
-        
-        # Add markers for each region (conceptual positioning)
-        region_coords = {
-            'UK': {'lat': 54.7, 'lon': -2.8},
-            'France': {'lat': 46.6, 'lon': 2.2},
-            'Caribbean': {'lat': 18.2, 'lon': -66.5}
-        }
-        
-        for _, row in filtered_df.iterrows():
-            region = row['Market Region']
-            if region in region_coords:
-                fig_map.add_trace(go.Scattermapbox(
-                    lat=[region_coords[region]['lat']],
-                    lon=[region_coords[region]['lon']],
-                    mode='markers',
-                    marker=dict(
-                        size=row['Monthly Recurring Revenue (GBP)']/1000,
-                        color=row['Community Impact Score'],
-                        colorscale='Viridis',
-                        showscale=True,
-                        colorbar=dict(title="Impact Score")
-                    ),
-                    text=f"{region} - {row['Market Type']}<br>Revenue: £{row['Monthly Recurring Revenue (GBP)']:,}<br>Impact: {row['Community Impact Score']}/5",
-                    hoverinfo='text',
-                    name=f"{region} ({row['Market Type']})"
-                ))
-        
-        fig_map.update_layout(
-            mapbox=dict(
-                style="open-street-map",
-                center=dict(lat=45, lon=-10),
-                zoom=2
-            ),
-            title="Global Market Presence & Performance",
-            height=400
-        )
-        
-        st.plotly_chart(fig_map, use_container_width=True)
+    # Create columns for regional metrics
+    metric_cols = st.columns(len(filtered_df['Market Region'].unique()))
     
-    with col2:
-        st.subheader("Regional Performance")
-        for region in filtered_df['Market Region'].unique():
-            region_data = filtered_df[filtered_df['Market Region'] == region]
-            revenue = region_data['Monthly Recurring Revenue (GBP)'].sum()
-            avg_impact = region_data['Community Impact Score'].mean()
-            
+    for idx, region in enumerate(filtered_df['Market Region'].unique()):
+        region_data = filtered_df[filtered_df['Market Region'] == region]
+        revenue = region_data['Monthly Recurring Revenue (GBP)'].sum()
+        avg_impact = region_data['Community Impact Score'].mean()
+        
+        with metric_cols[idx]:
             st.markdown(f"""
-            **{region}**
-            - Revenue: £{revenue:,}
-            - Impact: {avg_impact:.1f}/5.0
-            - Markets: {len(region_data)}
-            """)
+            <div style="
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                padding: 20px;
+                border-radius: 12px;
+                color: white;
+                text-align: center;
+                margin: 10px 0;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            ">
+                <h3 style="margin: 0 0 15px 0; font-size: 1.4em;">{region}</h3>
+                <p style="margin: 8px 0; font-size: 16px; font-weight: bold;">💰 £{revenue:,}</p>
+                <p style="margin: 8px 0; font-size: 14px;">🎯 Impact: {avg_impact:.1f}/5.0</p>
+                <p style="margin: 8px 0; font-size: 14px;">📊 Markets: {len(region_data)}</p>
+            </div>
+            """, unsafe_allow_html=True)
+    
+    # Add spacing before map
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # Map gets full width
+    st.subheader("Global Market Presence & Performance")
+    
+    # Create a simple map representation
+    # Since we don't have actual coordinates, we'll create a conceptual map
+    fig_map = go.Figure()
+    
+    # Add markers for each region (conceptual positioning)
+    region_coords = {
+        'UK': {'lat': 54.7, 'lon': -2.8},
+        'France': {'lat': 46.6, 'lon': 2.2},
+        'Caribbean': {'lat': 18.2, 'lon': -66.5}
+    }
+    
+    for _, row in filtered_df.iterrows():
+        region = row['Market Region']
+        if region in region_coords:
+            fig_map.add_trace(go.Scattermapbox(
+                lat=[region_coords[region]['lat']],
+                lon=[region_coords[region]['lon']],
+                mode='markers',
+                marker=dict(
+                    size=row['Monthly Recurring Revenue (GBP)']/1000,
+                    color=row['Community Impact Score'],
+                    colorscale='Viridis',
+                    showscale=True,
+                    colorbar=dict(title="Impact Score")
+                ),
+                text=f"{region} - {row['Market Type']}<br>Revenue: £{row['Monthly Recurring Revenue (GBP)']:,}<br>Impact: {row['Community Impact Score']}/5",
+                hoverinfo='text',
+                name=f"{region} ({row['Market Type']})"
+            ))
+    
+    fig_map.update_layout(
+        mapbox=dict(
+            style="open-street-map",
+            center=dict(lat=45, lon=-10),
+            zoom=2
+        ),
+        height=500,
+        margin=dict(l=0, r=0, t=0, b=0)
+    )
+    
+    st.plotly_chart(fig_map, use_container_width=True)
 
 with tab3:
     st.header("Partnership Network Analysis")
