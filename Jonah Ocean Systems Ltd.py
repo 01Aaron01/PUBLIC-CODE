@@ -382,4 +382,4 @@ with tab4:
 
 # Footer
 st.markdown("---")
-st.markdown("*Dashboard last updated: Real-time | Data source: Jonah Ocean Systems Ltd 2024, all rights reserved.*")
+st.markdown("*Dashboard last updated: Real-time | Data source: Jonah Ocean Systems Ltd 2024, All Rights Reserved.*")
