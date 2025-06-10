@@ -655,7 +655,7 @@ elif page == "Performance Analytics":
         <div style="padding: 1rem; background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); border-radius: 8px; text-align: center;">
             <h4 style="color: #111827;">⚡ Volatility</h4>
             <h2 style="color: #3b82f6;">8.2%</h2>
-            <p>Annualized volatility</p>
+            <p style="color: #111827;">Annualized volatility</p>
         </div>
         """, unsafe_allow_html=True)
     
