@@ -255,17 +255,30 @@ with tab2:
     
     with col2:
         st.subheader("Regional Performance")
+        
+        # Add some vertical spacing
+        st.markdown("<br>", unsafe_allow_html=True)
+        
         for region in filtered_df['Market Region'].unique():
             region_data = filtered_df[filtered_df['Market Region'] == region]
             revenue = region_data['Monthly Recurring Revenue (GBP)'].sum()
             avg_impact = region_data['Community Impact Score'].mean()
             
+            # Create a styled container for each region
             st.markdown(f"""
-            **{region}**
-            - Revenue: £{revenue:,}
-            - Impact: {avg_impact:.1f}/5.0
-            - Markets: {len(region_data)}
-            """)
+            <div style="
+                background-color: #f0f2f6;
+                padding: 15px;
+                border-radius: 8px;
+                margin: 10px 0;
+                border-left: 4px solid #1f77b4;
+            ">
+                <h4 style="margin: 0 0 10px 0; color: #1f77b4;">{region}</h4>
+                <p style="margin: 5px 0; font-size: 14px;">💰 Revenue: £{revenue:,}</p>
+                <p style="margin: 5px 0; font-size: 14px;">🎯 Impact: {avg_impact:.1f}/5.0</p>
+                <p style="margin: 5px 0; font-size: 14px;">📊 Markets: {len(region_data)}</p>
+            </div>
+            """, unsafe_allow_html=True)
 
 with tab3:
     st.header("Partnership Network Analysis")
