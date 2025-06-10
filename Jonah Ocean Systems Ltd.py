@@ -266,7 +266,15 @@ with tab2:
                     color=row['Community Impact Score'],
                     colorscale='Viridis',
                     showscale=True,
-                    colorbar=dict(title="Impact Score")
+                    colorbar=dict(
+                        title="Impact Score",
+                        orientation="h",  # Horizontal orientation
+                        x=0.5,  # Center horizontally
+                        y=-0.1,  # Position below the map
+                        xanchor="center",
+                        len=0.5,  # Make it shorter
+                        thickness=15  # Make it thinner
+                    )
                 ),
                 text=f"{region} - {row['Market Type']}<br>Revenue: £{row['Monthly Recurring Revenue (GBP)']:,}<br>Impact: {row['Community Impact Score']}/5",
                 hoverinfo='text',
@@ -280,7 +288,7 @@ with tab2:
             zoom=2
         ),
         height=500,
-        margin=dict(l=0, r=0, t=0, b=0)
+        margin=dict(l=0, r=0, t=0, b=50)  # Add bottom margin for horizontal colorbar
     )
     
     st.plotly_chart(fig_map, use_container_width=True)
@@ -374,4 +382,4 @@ with tab4:
 
 # Footer
 st.markdown("---")
-st.markdown("*Dashboard last updated: Real-time | Data source: Startup Nursery Metrics Database*")
+st.markdown("*Dashboard last updated: Real-time | Data source: Jonah Ocean Systems Ltd 2024, all rights reserved.*")
