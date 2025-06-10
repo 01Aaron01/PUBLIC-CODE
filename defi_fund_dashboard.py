@@ -35,6 +35,7 @@ st.markdown("""
         border-left: 4px solid #0ea5e9;
         margin-bottom: 1rem;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        color: #111827;
     }
     .highlight-box {
         background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
@@ -43,6 +44,7 @@ st.markdown("""
         border-left: 4px solid #f59e0b;
         margin: 1rem 0;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        color: #111827;
     }
     .success-box {
         background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
@@ -51,6 +53,7 @@ st.markdown("""
         border-left: 4px solid #10b981;
         margin: 1rem 0;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        color: #111827;
     }
     .danger-box {
         background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
@@ -59,6 +62,7 @@ st.markdown("""
         border-left: 4px solid #ef4444;
         margin: 1rem 0;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        color: #111827;
     }
     .stMetric > div > div > div > div {
         font-size: 1.2rem;
