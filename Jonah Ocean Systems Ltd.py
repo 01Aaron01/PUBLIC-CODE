@@ -7,7 +7,7 @@ import numpy as np
 
 # Page configuration
 st.set_page_config(
-    page_title="Startup Nursery Dashboard",
+    page_title="Jonah.Works Startup Nursery Dashboard",
     page_icon="🚀",
     layout="wide",
     initial_sidebar_state="expanded"
