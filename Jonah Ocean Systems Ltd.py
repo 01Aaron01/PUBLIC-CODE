@@ -85,7 +85,7 @@ def load_data():
 df = load_data()
 
 # Header
-st.title("🚀 Startup Nursery Performance Dashboard")
+st.title("🚀 Jonah.Works Performance Dashboard 2019 - 2024, All Rights Reserved")
 st.markdown("*Director's Executive View - Real-time Business Intelligence*")
 
 # Sidebar filters
