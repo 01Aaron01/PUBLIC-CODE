@@ -1,0 +1,8 @@
+streamlit
+pandas
+numpy
+plotly
+
+
+### Streamlit Cloud automatically detects a file named requirements.txt in the root of your app’s GitHub repo (or deployment folder) 
+### and uses it to create a virtual environment for your app.
